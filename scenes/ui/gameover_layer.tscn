@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://txtw05yrhukj"]
+
+[ext_resource type="PackedScene" uid="uid://bf6gmxbqm372s" path="res://scenes/ui/gameover.tscn" id="1_jppo7"]
+
+[node name="GameoverLayer" type="CanvasLayer" unique_id=965365218]
+layer = 2
+
+[node name="Gameover" parent="." unique_id=1321038462 instance=ExtResource("1_jppo7")]

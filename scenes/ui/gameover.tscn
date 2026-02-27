@@ -1,0 +1,356 @@
+[gd_scene format=3 uid="uid://bf6gmxbqm372s"]
+
+[ext_resource type="Theme" uid="uid://l3l2u3n6q626" path="res://themes/main_ui.tres" id="1_xg0lb"]
+[ext_resource type="Script" uid="uid://cobd354pukbo2" path="res://scripts/ui/Gameover.cs" id="2_sxuf3"]
+[ext_resource type="Shader" uid="uid://c1vddf5a2olxx" path="res://shaders/GlassShader.gdshader" id="3_valnw"]
+[ext_resource type="FontFile" uid="uid://cf2dv487h7wdx" path="res://assets/SmileySans-Oblique.ttf" id="4_58jn4"]
+[ext_resource type="Texture2D" uid="uid://0xgs8i2g810s" path="res://assets/img/microapp-white.svg" id="5_4pfak"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxuf3"]
+shader = ExtResource("3_valnw")
+shader_parameter/blur_radius = 4.0
+shader_parameter/brightness = 1.1
+shader_parameter/tint = Color(0.9, 0.95, 1, 0.15)
+shader_parameter/opacity = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_4pfak"]
+font = ExtResource("4_58jn4")
+font_size = 60
+outline_size = 2
+outline_color = Color(0, 0.9137255, 0.9098039, 1)
+
+[sub_resource type="Animation" id="Animation_58jn4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/opacity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4pfak"]
+resource_name = "label_zoom_rotate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Title:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.23333333, 0.8666667),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [-0.1308997, 0.1308997]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g3fwn"]
+_data = {
+&"RESET": SubResource("Animation_58jn4"),
+&"label_zoom_rotate": SubResource("Animation_4pfak")
+}
+
+[sub_resource type="Animation" id="Animation_g3fwn"]
+resource_name = "bg_fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nh7px"]
+_data = {
+&"bg_fade_in": SubResource("Animation_g3fwn")
+}
+
+[sub_resource type="Animation" id="Animation_nh7px"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ComRetryButton:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MissionRetryButton2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yj70m"]
+resource_name = "btn_spawn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ComRetryButton:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MissionRetryButton2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5nft6"]
+_data = {
+&"RESET": SubResource("Animation_nh7px"),
+&"btn_spawn": SubResource("Animation_yj70m")
+}
+
+[node name="Gameover" type="Control" unique_id=1321038462]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xg0lb")
+script = ExtResource("2_sxuf3")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=399748151]
+material = SubResource("ShaderMaterial_sxuf3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=157918750]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1635897679]
+copy_mode = 2
+
+[node name="Title" type="Label" parent="." unique_id=689035779]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.3
+offset_left = -0.030006409
+offset_right = 0.029968262
+offset_bottom = 0.19999695
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "GAMEOVER"
+label_settings = SubResource("LabelSettings_4pfak")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2032692836]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.35
+anchor_right = 0.75
+anchor_bottom = 0.65
+offset_left = 0.099998474
+offset_top = -3.0517578e-05
+offset_right = -0.07003784
+offset_bottom = 193.40002
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EndGameTip" type="Label" parent="VBoxContainer" unique_id=1822541300]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+size_flags_vertical = 1
+text = "游戏结束游戏结束游戏结束游戏结束"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=282295137]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1799374820]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1495271667]
+layout_mode = 2
+text = "击碎砖块"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1595350444]
+layout_mode = 2
+text = "最大连击"
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1952791211]
+layout_mode = 2
+text = "SUPER连击数"
+
+[node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1198396077]
+layout_mode = 2
+text = "得分"
+
+[node name="PlaceholderContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=847487163]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="BricksCnt" type="Label" parent="VBoxContainer/HBoxContainer/PlaceholderContainer" unique_id=232335366]
+layout_mode = 2
+text = "1000"
+
+[node name="MaxComboCnt" type="Label" parent="VBoxContainer/HBoxContainer/PlaceholderContainer" unique_id=376688344]
+layout_mode = 2
+text = "100"
+
+[node name="SuperComboCnt" type="Label" parent="VBoxContainer/HBoxContainer/PlaceholderContainer" unique_id=1753758411]
+layout_mode = 2
+text = "100"
+
+[node name="Score" type="Label" parent="VBoxContainer/HBoxContainer/PlaceholderContainer" unique_id=1109207123]
+layout_mode = 2
+text = "8192"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=669829553]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1326938473]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1868558488]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "最终得分"
+
+[node name="FinalScore" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=327044304]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "9999"
+
+[node name="ComRetryButton" type="Button" parent="." unique_id=1149355561]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.68
+anchor_right = 0.75
+anchor_bottom = 0.73
+offset_left = 0.069992065
+offset_top = -0.2000122
+offset_bottom = -6.1035156e-05
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "等待复活（x秒）"
+
+[node name="MissionRetryButton2" type="Button" parent="." unique_id=1082685641]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.75
+anchor_right = 0.75
+anchor_bottom = 0.8
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "立即复活"
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="MissionRetryButton2" unique_id=1512857695]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.33
+anchor_bottom = 0.65
+offset_left = -0.054000854
+offset_top = -0.0009753704
+offset_right = -0.014007568
+offset_bottom = 0.6500244
+texture = ExtResource("5_4pfak")
+expand_mode = 2
+
+[node name="UiAnimationPlayer" type="AnimationPlayer" parent="." unique_id=575003705]
+libraries/ = SubResource("AnimationLibrary_g3fwn")
+
+[node name="BGAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1032321338]
+libraries/ = SubResource("AnimationLibrary_nh7px")
+
+[node name="BtnAnimationPlayer" type="AnimationPlayer" parent="." unique_id=49308113]
+libraries/ = SubResource("AnimationLibrary_5nft6")

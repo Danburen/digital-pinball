@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://n3dcupnusutg"]
+
+[ext_resource type="Script" uid="uid://cxtu044bnw1tu" path="res://scripts/Game.cs" id="1_iywne"]
+[ext_resource type="Script" uid="uid://crfxkp6ycf0ue" path="res://scripts/Game/LevelGenerator.cs" id="2_iywne"]
+[ext_resource type="PackedScene" uid="uid://d0hqnubvjyylc" path="res://scenes/background.tscn" id="2_p57ef"]
+[ext_resource type="PackedScene" uid="uid://yfoh1davmsyy" path="res://scenes/baffle.tscn" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://38jhass8f4u0" path="res://assets/img/系统_system.svg" id="4_lbhrr"]
+[ext_resource type="Script" uid="uid://bk53xnkkjr0cy" path="res://scripts/Camera/Camera2d.cs" id="5_p57ef"]
+[ext_resource type="Script" uid="uid://ytutsn3chwhv" path="res://scripts/Game/HudLayer.cs" id="7_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://bkw0lw6l8d1au" path="res://assets/img/ball.svg" id="8_0tnpc"]
+[ext_resource type="Theme" uid="uid://l3l2u3n6q626" path="res://themes/main_ui.tres" id="10_vtaks"]
+[ext_resource type="PackedScene" uid="uid://dce5or3jv5km1" path="res://scenes/cut_scene_layer.tscn" id="11_kvpfn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tnpc"]
+bg_color = Color(0.07058824, 0.07058824, 0.12156863, 1)
+border_width_bottom = 1
+border_color = Color(0, 0.91, 0.91, 0.61960787)
+shadow_color = Color(0, 0, 0, 0.28627452)
+shadow_size = 5
+shadow_offset = Vector2(0, 10)
+
+[node name="Game" type="Control" unique_id=2128853776]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_vtaks")
+script = ExtResource("1_iywne")
+
+[node name="Background" parent="." unique_id=1677065142 instance=ExtResource("2_p57ef")]
+GridSize = 30
+
+[node name="LevelGenerator" type="Node" parent="." unique_id=45914176]
+script = ExtResource("2_iywne")
+
+[node name="Baffle" parent="." unique_id=1301063678 instance=ExtResource("2_yqjtg")]
+
+[node name="Bricks" type="Node" parent="." unique_id=988616575]
+
+[node name="Balls" type="Node" parent="." unique_id=1441086837]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1884711315]
+anchor_mode = 0
+script = ExtResource("5_p57ef")
+
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=77715464]
+script = ExtResource("7_kvpfn")
+
+[node name="TopBar" type="Control" parent="HUDLayer" unique_id=283526851]
+z_index = 100
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+
+[node name="Panel" type="Panel" parent="HUDLayer/TopBar" unique_id=1571614638]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("10_vtaks")
+theme_override_styles/panel = SubResource("StyleBoxFlat_0tnpc")
+
+[node name="Button" type="Button" parent="HUDLayer/TopBar" unique_id=47939627]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -15.0
+offset_right = -9.0
+offset_bottom = 19.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/icon_max_width = 24
+icon = ExtResource("4_lbhrr")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="HUDLayer/TopBar" unique_id=1143610168]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -9.0
+offset_right = 26.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Score: 9999999"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUDLayer/TopBar" unique_id=861755741]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -7.0
+offset_right = 74.0
+offset_bottom = 11.0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUDLayer/TopBar/HBoxContainer" unique_id=537844574]
+layout_mode = 2
+texture = ExtResource("8_0tnpc")
+expand_mode = 2
+
+[node name="CutSceneLayer" parent="." unique_id=1022128372 instance=ExtResource("11_kvpfn")]

@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://dgig6sqbmw17y"]
+
+[ext_resource type="Script" uid="uid://c1qbsbmiieoee" path="res://scripts/Pinball.cs" id="1_w5td1"]
+[ext_resource type="FontFile" uid="uid://cf2dv487h7wdx" path="res://assets/SmileySans-Oblique.ttf" id="2_snm7k"]
+[ext_resource type="Texture2D" uid="uid://bkw0lw6l8d1au" path="res://assets/img/ball.svg" id="3_7us4m"]
+[ext_resource type="Script" uid="uid://bqhdpntdolcyd" path="res://scripts/PinballTrail.cs" id="4_5eq27"]
+
+[sub_resource type="Curve" id="Curve_5eq27"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w5td1"]
+radius = 65.0
+
+[sub_resource type="Theme" id="Theme_7us4m"]
+default_font = ExtResource("2_snm7k")
+Label/colors/font_color = Color(0.18000486, 0.18000486, 0.18000486, 1)
+Label/font_sizes/font_size = 24
+
+[sub_resource type="Gradient" id="Gradient_snm7k"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="Curve" id="Curve_uxavs"]
+_data = [Vector2(0.0212766, 0), 0.0, 0.0, 0, 0, Vector2(0.14361703, 1), 0.0, 0.0, 0, 0, Vector2(0.58510643, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_4xpxx"]
+offsets = PackedFloat32Array(0, 0.16049382, 0.74691355, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.16049382, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Pinball" type="CharacterBody2D" unique_id=1857109152]
+script = ExtResource("1_w5td1")
+
+[node name="Trail" type="Line2D" parent="." unique_id=1532246561]
+width_curve = SubResource("Curve_5eq27")
+script = ExtResource("4_5eq27")
+length = 20
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=292122510]
+position = Vector2(0.1, -0.40000078)
+scale = Vector2(0.3, 0.288)
+texture = ExtResource("3_7us4m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=325443536]
+scale = Vector2(0.3, 0.3)
+shape = SubResource("CircleShape2D_w5td1")
+
+[node name="Label" type="Label" parent="." unique_id=1441197430]
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = -15.0
+offset_right = 22.5
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_7us4m")
+text = "2048"
+horizontal_alignment = 1
+
+[node name="ExplosionSmall" type="CPUParticles2D" parent="." unique_id=468966103]
+emitting = false
+amount = 24
+lifetime = 0.4
+one_shot = true
+preprocess = 0.1
+randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 30.0
+spread = 180.0
+gravity = Vector2(0, 800)
+initial_velocity_min = 100.0
+initial_velocity_max = 400.0
+damping_min = 50.0
+damping_max = 100.0
+angle_max = 360.0
+scale_amount_min = 2.0
+scale_amount_max = 6.0
+color_ramp = SubResource("Gradient_snm7k")
+
+[node name="ExplosionBig" type="CPUParticles2D" parent="." unique_id=330803956]
+emitting = false
+amount = 4
+texture = ExtResource("3_7us4m")
+lifetime = 0.3
+one_shot = true
+preprocess = 0.1
+randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 30.0
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 800)
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
+damping_min = 50.0
+damping_max = 100.0
+angle_max = 360.0
+color_ramp = SubResource("Gradient_snm7k")
+
+[node name="AppearEffect" type="CPUParticles2D" parent="." unique_id=1469098]
+emitting = false
+amount = 35
+texture = ExtResource("3_7us4m")
+lifetime = 1.4
+one_shot = true
+speed_scale = 1.6
+explosiveness = 0.7
+emission_shape = 6
+emission_ring_inner_radius = 80.0
+emission_ring_radius = 70.0
+gravity = Vector2(0, 0)
+orbit_velocity_max = 0.05
+radial_accel_min = -100.0
+radial_accel_max = -80.0
+scale_amount_min = 0.06
+scale_amount_max = 0.13
+scale_amount_curve = SubResource("Curve_uxavs")
+color_ramp = SubResource("Gradient_4xpxx")

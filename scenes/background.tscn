@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://d0hqnubvjyylc"]
+
+[ext_resource type="Script" uid="uid://qaep8ohsple" path="res://scripts/Background.cs" id="1_bkp1e"]
+
+[node name="Background" type="Sprite2D" unique_id=1677065142]
+z_index = -100
+script = ExtResource("1_bkp1e")

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://d1s2v5xrlk2dv"]
+
+[ext_resource type="Texture2D" uid="uid://cyjwts3srvvfo" path="res://assets/img/line.svg" id="1_umdn0"]
+[ext_resource type="Script" uid="uid://dps860078oin1" path="res://scenes/effects/BumpPartical.cs" id="2_gkv3m"]
+
+[sub_resource type="Curve" id="Curve_gkv3m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="BumpPartical" type="CPUParticles2D" unique_id=701581317]
+emitting = false
+amount = 9
+texture = ExtResource("1_umdn0")
+lifetime = 0.8
+one_shot = true
+preprocess = 0.2
+explosiveness = 0.85
+particle_flag_align_y = true
+gravity = Vector2(0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+damping_min = 10.0
+damping_max = 50.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_gkv3m")
+script = ExtResource("2_gkv3m")

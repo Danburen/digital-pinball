@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://dtbuts7fpq3he"]
+
+[ext_resource type="Script" uid="uid://bsvo0clp6wj0w" path="res://scripts/StartMenu.cs" id="1_p6ge0"]
+[ext_resource type="FontFile" uid="uid://cf2dv487h7wdx" path="res://assets/SmileySans-Oblique.ttf" id="2_nld4k"]
+[ext_resource type="Texture2D" uid="uid://bwxiox4y4jcvl" path="res://assets/img/播放_play-one.svg" id="3_nld4k"]
+[ext_resource type="Theme" uid="uid://l3l2u3n6q626" path="res://themes/main_ui.tres" id="4_4v6gu"]
+[ext_resource type="Texture2D" uid="uid://cm6752alu8iw5" path="res://assets/img/配置_config.svg" id="5_ffvpn"]
+[ext_resource type="PackedScene" uid="uid://d0hqnubvjyylc" path="res://scenes/background.tscn" id="6_4v6gu"]
+[ext_resource type="PackedScene" uid="uid://b6napw8x6mgm" path="res://scenes/auto_play.tscn" id="6_nxjfj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8jbf6"]
+line_spacing = 5.0
+font = ExtResource("2_nld4k")
+font_size = 66
+font_color = Color(0.94, 0.94, 0.94, 1)
+outline_color = Color(0, 0.9137255, 0.9098039, 1)
+shadow_size = 7
+shadow_color = Color(0, 0.64, 0.64, 1)
+shadow_offset = Vector2(0, 2)
+
+[node name="StartMenu" type="Control" unique_id=458249149]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p6ge0")
+
+[node name="AutoPlay" parent="." unique_id=100017881 instance=ExtResource("6_nxjfj")]
+columns = 4
+InitialRows = 4
+dropInterval = 0.5
+
+[node name="Background" parent="." unique_id=1677065142 instance=ExtResource("6_4v6gu")]
+GridSize = 30
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=517026420]
+layer = 100
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1350968831]
+z_index = 100
+anchors_preset = -1
+anchor_left = 0.26200002
+anchor_top = 0.29200003
+anchor_right = 0.73800004
+anchor_bottom = 0.39000002
+offset_left = -3.1600113
+offset_top = 0.39997864
+offset_right = 3.1599731
+offset_bottom = 3.0
+grow_horizontal = 2
+text = "数字弹珠"
+label_settings = SubResource("LabelSettings_8jbf6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1104577144]
+z_index = 100
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -48.0
+offset_right = 140.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_4v6gu")
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=713960579]
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("3_nld4k")
+icon_alignment = 1
+language = "zh_CN"
+
+[node name="SettingButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=39760304]
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("5_ffvpn")
+icon_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

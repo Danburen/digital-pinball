@@ -1,0 +1,43 @@
+[gd_resource type="Theme" format=3 uid="uid://l3l2u3n6q626"]
+
+[ext_resource type="FontFile" uid="uid://cf2dv487h7wdx" path="res://assets/SmileySans-Oblique.ttf" id="1_ig76s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nld4k"]
+bg_color = Color(0.101960786, 0.101960786, 0.18039216, 1)
+border_width_bottom = 5
+border_color = Color(5.390644e-06, 0.91382617, 0.90788734, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jbf6"]
+bg_color = Color(0.101960786, 0.101960786, 0.18039216, 1)
+border_width_bottom = 4
+border_color = Color(0, 0.9137255, 0.9098039, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ig76s"]
+bg_color = Color(0.07058824, 0.07058824, 0.12156863, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.91, 0.91, 0.61960787)
+shadow_color = Color(0, 0, 0, 0.28627452)
+shadow_size = 5
+shadow_offset = Vector2(0, 10)
+
+[resource]
+Button/constants/icon_max_width = 24
+Button/font_sizes/font_size = 20
+Button/fonts/font = ExtResource("1_ig76s")
+Button/styles/hover = SubResource("StyleBoxFlat_nld4k")
+Button/styles/normal = SubResource("StyleBoxFlat_nld4k")
+Button/styles/pressed = SubResource("StyleBoxFlat_8jbf6")
+Label/fonts/font = ExtResource("1_ig76s")
+Panel/styles/panel = SubResource("StyleBoxFlat_ig76s")
+VBoxContainer/constants/separation = 10

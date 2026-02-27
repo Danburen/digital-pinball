@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b6napw8x6mgm"]
+
+[ext_resource type="Script" uid="uid://qyjbibih1obt" path="res://scripts/AutoPlay.cs" id="1_lkbql"]
+[ext_resource type="PackedScene" uid="uid://d0hqnubvjyylc" path="res://scenes/background.tscn" id="1_pbmt6"]
+[ext_resource type="Script" uid="uid://crfxkp6ycf0ue" path="res://scripts/Game/LevelGenerator.cs" id="2_lkbql"]
+[ext_resource type="PackedScene" uid="uid://yfoh1davmsyy" path="res://scenes/baffle.tscn" id="3_3ekxg"]
+[ext_resource type="Script" uid="uid://bk53xnkkjr0cy" path="res://scripts/Camera/Camera2d.cs" id="4_dv0s8"]
+[ext_resource type="PackedScene" uid="uid://dce5or3jv5km1" path="res://scenes/cut_scene_layer.tscn" id="5_43r7n"]
+
+[node name="AutoPlay" type="Node2D" unique_id=100017881]
+script = ExtResource("1_lkbql")
+
+[node name="Background" parent="." unique_id=1677065142 instance=ExtResource("1_pbmt6")]
+GridSize = 30
+
+[node name="CutSceneLayer" parent="." unique_id=1022128372 instance=ExtResource("5_43r7n")]
+layer = 10
+
+[node name="LevelGenerator" type="Node" parent="." unique_id=1140017959]
+script = ExtResource("2_lkbql")
+
+[node name="Baffle" parent="." unique_id=963671883 instance=ExtResource("3_3ekxg")]
+
+[node name="Bricks" type="Node" parent="." unique_id=1216238273]
+
+[node name="Balls" type="Node" parent="." unique_id=959997917]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=731432974]
+anchor_mode = 0
+script = ExtResource("4_dv0s8")

@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://cktsfs4etbkpn"]
+
+[ext_resource type="Script" uid="uid://pg5t5n5oh8w8" path="res://scripts/Brick.cs" id="1_0w5h4"]
+[ext_resource type="FontFile" uid="uid://cf2dv487h7wdx" path="res://assets/SmileySans-Oblique.ttf" id="1_5l4w1"]
+
+[sub_resource type="Theme" id="Theme_0w5h4"]
+default_font = ExtResource("1_5l4w1")
+Label/colors/font_color = Color(0.10747976, 0.10747973, 0.10747973, 1)
+Label/font_sizes/font_size = 22
+Label/fonts/font = ExtResource("1_5l4w1")
+
+[sub_resource type="Curve" id="Curve_0w5h4"]
+_data = [Vector2(0, 0.70786524), 0.0, 0.0, 0, 0, Vector2(0.2925532, 0.9662922), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_0w5h4"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jurt7"]
+size = Vector2(80, 30)
+
+[node name="Brick" type="StaticBody2D" unique_id=1500869720]
+script = ExtResource("1_0w5h4")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1630122795]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -15.0
+offset_right = 40.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="." unique_id=739486456]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_0w5h4")
+text = "value"
+horizontal_alignment = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1228018056]
+emitting = false
+amount = 18
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.87
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(40, 15)
+spread = 180.0
+gravity = Vector2(0, 800)
+initial_velocity_min = 100.0
+initial_velocity_max = 400.0
+damping_min = 33.663
+damping_max = 70.297
+angle_max = 360.0
+scale_amount_min = 2.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_0w5h4")
+color_ramp = SubResource("Gradient_0w5h4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2126533308]
+shape = SubResource("RectangleShape2D_jurt7")

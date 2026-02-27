@@ -1,10 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
-
-/android/
-.vscode
-
-.git
 .nomedia
 
 # Godot-specific ignores

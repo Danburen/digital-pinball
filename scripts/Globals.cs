@@ -11,7 +11,7 @@ public partial class Globals : Node
 		GD.Print("Globals.Ready");
     }
 	public static event Action OnHeartsChanged;
-	public static int globalScore = 0;
+	public static event Action<int> OnScoreChanged;
 	public static int gameStatus = 0; // 0: not started, 1: playing, 2: game over
 	public static GameOverType gameoverType = GameOverType.None;
 	public enum GameOverType{
@@ -24,6 +24,7 @@ public partial class Globals : Node
 	public static float topBarHeight = 40f;
 	private static int _maxHearts = 3;
 	private static int _hearts = _maxHearts;
+	public static int _globalScore = 0;
 
 	public static CanvasLayer HUDLayer;
 	public static int combo = 0;
@@ -39,6 +40,19 @@ public partial class Globals : Node
             }
         }
     }
+
+	public static int globalScore
+	{
+		get => _globalScore;
+		set
+		{
+			if(_globalScore != value)
+			{
+				_globalScore = value;
+				OnScoreChanged?.Invoke(value);
+			}
+		}
+	}
 
 	// we use CallDeferred() method to postpone adding CutSceneLayer to the node tree
 	// because the GodotEngine would busy creating and setting up sub nodes of current node

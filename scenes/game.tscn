@@ -4,12 +4,18 @@
 [ext_resource type="Script" uid="uid://crfxkp6ycf0ue" path="res://scripts/Game/LevelGenerator.cs" id="2_iywne"]
 [ext_resource type="PackedScene" uid="uid://d0hqnubvjyylc" path="res://scenes/background.tscn" id="2_p57ef"]
 [ext_resource type="PackedScene" uid="uid://yfoh1davmsyy" path="res://scenes/baffle.tscn" id="2_yqjtg"]
-[ext_resource type="Texture2D" uid="uid://38jhass8f4u0" path="res://assets/img/系统_system.svg" id="4_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://bilts5xmufvld" path="res://assets/img/系统_system.svg" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://bk53xnkkjr0cy" path="res://scripts/Camera/Camera2d.cs" id="5_p57ef"]
 [ext_resource type="Script" uid="uid://ytutsn3chwhv" path="res://scripts/Game/HudLayer.cs" id="7_kvpfn"]
-[ext_resource type="Texture2D" uid="uid://bkw0lw6l8d1au" path="res://assets/img/ball.svg" id="8_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://btanqyyevqo7s" path="res://assets/img/ball.svg" id="8_0tnpc"]
+[ext_resource type="Script" uid="uid://dk2lp6ejkcrcm" path="res://scripts/ui/ScoreLabel.cs" id="9_kvpfn"]
 [ext_resource type="Theme" uid="uid://l3l2u3n6q626" path="res://themes/main_ui.tres" id="10_vtaks"]
+[ext_resource type="Shader" uid="uid://c1vddf5a2olxx" path="res://shaders/GlassShader.gdshader" id="11_dinhu"]
 [ext_resource type="PackedScene" uid="uid://dce5or3jv5km1" path="res://scenes/cut_scene_layer.tscn" id="11_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://bcogt8wwppsvo" path="res://assets/img/播放_play-one.svg" id="12_trtic"]
+[ext_resource type="Texture2D" uid="uid://chjnmhm6asy2k" path="res://assets/img/配置_config.svg" id="13_ir15t"]
+[ext_resource type="Texture2D" uid="uid://bw01okmfgyjtj" path="res://assets/img/帮助中心_helpcenter.svg" id="14_ir15t"]
+[ext_resource type="Texture2D" uid="uid://c0yemoe0jgkod" path="res://assets/img/重新_redo.svg" id="15_ca42v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0tnpc"]
 bg_color = Color(0.07058824, 0.07058824, 0.12156863, 1)
@@ -18,6 +24,33 @@ border_color = Color(0, 0.91, 0.91, 0.61960787)
 shadow_color = Color(0, 0, 0, 0.28627452)
 shadow_size = 5
 shadow_offset = Vector2(0, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
+shader = ExtResource("11_dinhu")
+shader_parameter/blur_radius = 4.0
+shader_parameter/brightness = 1.1
+shader_parameter/tint = Color(0.9, 0.95, 1, 0.15)
+shader_parameter/opacity = 0.0
+
+[sub_resource type="Animation" id="Animation_g3fwn"]
+resource_name = "bg_fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_trtic"]
+_data = {
+&"bg_fade_in": SubResource("Animation_g3fwn")
+}
 
 [node name="Game" type="Control" unique_id=2128853776]
 layout_mode = 3
@@ -87,7 +120,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Label" type="Label" parent="HUDLayer/TopBar" unique_id=1143610168]
+[node name="ScoreLabel" type="Label" parent="HUDLayer/TopBar" unique_id=1143610168]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,6 +134,7 @@ offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Score: 9999999"
+script = ExtResource("9_kvpfn")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUDLayer/TopBar" unique_id=861755741]
 layout_mode = 1
@@ -117,5 +151,129 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("8_0tnpc")
 expand_mode = 2
+
+[node name="Pause" type="Control" parent="HUDLayer" unique_id=993589374]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/Pause" unique_id=159028158]
+material = SubResource("ShaderMaterial_kvuet")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HUDLayer/Pause" unique_id=1210517107]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("10_vtaks")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDLayer/Pause/Panel" unique_id=1836613515]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.9
+offset_top = -1.5258789e-05
+offset_bottom = -1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="HUDLayer/Pause/Panel/VBoxContainer" unique_id=1103483641]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="HUDLayer/Pause/Panel/VBoxContainer/PlayButton" unique_id=191126676]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_trtic")
+
+[node name="SettingButton" type="Button" parent="HUDLayer/Pause/Panel/VBoxContainer" unique_id=1153656305]
+layout_mode = 2
+size_flags_vertical = 3
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUDLayer/Pause/Panel/VBoxContainer/SettingButton" unique_id=221375854]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_ir15t")
+
+[node name="HelpButton" type="Button" parent="HUDLayer/Pause/Panel/VBoxContainer" unique_id=1613589057]
+layout_mode = 2
+size_flags_vertical = 3
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUDLayer/Pause/Panel/VBoxContainer/HelpButton" unique_id=2006943653]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_ir15t")
+
+[node name="RetryButton" type="Button" parent="HUDLayer/Pause/Panel/VBoxContainer" unique_id=719730005]
+layout_mode = 2
+size_flags_vertical = 3
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUDLayer/Pause/Panel/VBoxContainer/RetryButton" unique_id=1641348242]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_ca42v")
+
+[node name="BGAnimationPlayer" type="AnimationPlayer" parent="HUDLayer/Pause" unique_id=1316102497]
+libraries/ = SubResource("AnimationLibrary_trtic")
 
 [node name="CutSceneLayer" parent="." unique_id=1022128372 instance=ExtResource("11_kvpfn")]

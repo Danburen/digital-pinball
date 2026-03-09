@@ -59,7 +59,6 @@ public partial class Brick : StaticBody2D
 		{
 			Destruction();
 		}
-		Globals.globalScore += _hitPoints;
 		return _hitPoints;
 	}
 
@@ -70,7 +69,10 @@ public partial class Brick : StaticBody2D
 		CollisionLayer = 0;
     	CollisionMask = 0;
 		_explosion.Emitting = true;
-		GetTree().CreateTimer(_explosion.Lifetime).Timeout += QueueFree;
+		GetTree().CreateTimer(_explosion.Lifetime).Timeout += () => {
+			Globals.globalScore += _maxHitPoints;
+			QueueFree();
+		};
 	}
 
 

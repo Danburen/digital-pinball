@@ -42,7 +42,6 @@ public partial class Game : Control, IPlayeable
 		_gameTopBarPanel = GetNode<Panel>("HUDLayer/TopBar/Panel");
 		Globals.camera = GetNode<Camera2d>("Camera2D");
 		Globals.HUDLayer = GetNode<CanvasLayer>("HUDLayer");
-		ProcessMode = ProcessModeEnum.Disabled;
 
 		_levelGen = new LevelGenerator(columns);
 		UpdateUserInterface();
@@ -51,22 +50,24 @@ public partial class Game : Control, IPlayeable
 		SpawnInitialBall(); 
 		Globals.gameStatus = 1;
 		Globals.hearts = 3;
+		Globals.globalScore = 0;
 		Globals.camera.objs =
 				[.. _pinBallsContainer.GetChildren().OfType<Node2D>(), _baffle];
 		GD.Print($"View Rect {GetViewportRect().Size.Y}, bafflePos:{Globals.bafflePos}");
-
-		_brickDropTimer = new Timer();
-		_brickDropTimer.WaitTime = dropInterval;
-		_brickDropTimer.OneShot = false;
-		_brickDropTimer.Connect("timeout", new Callable(this, nameof(OnBrickDropTimerTimeout)));
+        _brickDropTimer = new Timer
+        {
+            WaitTime = dropInterval,
+            OneShot = false
+        };
+        _brickDropTimer.Connect("timeout", new Callable(this, nameof(OnBrickDropTimerTimeout)));
 		AddChild(_brickDropTimer);
 		_brickDropTimer.Start();
 		Globals.CutScene().FadeOut(
 			() => {	
-				ProcessMode = ProcessModeEnum.Always;
-				GameOver(Globals.GameOverType.BricksReachedBottom);
+				ProcessMode = ProcessModeEnum.Inherit;
 			}	
 		);
+		// GameOver(Globals.GameOverType.BricksReachedBottom);
 	}
 
 	private void OnBrickDropTimerTimeout()
@@ -123,7 +124,6 @@ public partial class Game : Control, IPlayeable
 		Globals.CutScene(100).FadeIn(
 			() => {
 				GetTree().ChangeSceneToFile("res://scenes/auto_play.tscn");
-				Globals.CutScene(100).FadeOut();
 			}
 		);
 	}

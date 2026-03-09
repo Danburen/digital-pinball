@@ -43,9 +43,22 @@ public partial class AutoPlay : Node2D, IPlayeable
 		_pinballScene = GD.Load<PackedScene>("res://scenes/pinball.tscn");
 		_gameoverScene = GD.Load<PackedScene>("res://scenes/ui/gameover.tscn");
 
+		Globals.CutScene().FadeOut(() => {
+			_brickDropTimer = new Timer
+			{
+				WaitTime = dropInterval,
+				OneShot = false
+			};
+			_brickDropTimer.Connect("timeout", new Callable(this, nameof(OnBrickDropTimerTimeout)));
+			AddChild(_brickDropTimer);
+			_brickDropTimer.Start();
+
+			_status = AutoPlayStatus.IDLE;
+		});
+		
 		if(Globals.gameStatus == 2){
 			CanvasLayer gameoverLayer = new();
-			gameoverLayer.Layer = 1;
+			gameoverLayer.Layer = 0;
 			AddChild(gameoverLayer);
 			Gameover scene =  _gameoverScene.Instantiate<Gameover>();
 			gameoverLayer.AddChild(scene);
@@ -63,21 +76,7 @@ public partial class AutoPlay : Node2D, IPlayeable
 		SpawnInitialBall(); 
 		Globals.camera.objs =
 			[.. _pinBallsContainer.GetChildren().OfType<Node2D>(), _baffle];
-		GD.Print("Fade out start");
 		Globals.hearts = 9999;
-		Globals.CutScene().FadeOut(() => {
-            GD.Print("Fade out complete");
-			_brickDropTimer = new Timer
-			{
-				WaitTime = dropInterval,
-				OneShot = false
-			};
-			_brickDropTimer.Connect("timeout", new Callable(this, nameof(OnBrickDropTimerTimeout)));
-			AddChild(_brickDropTimer);
-			_brickDropTimer.Start();
-
-			_status = AutoPlayStatus.IDLE;
-		});
 	}
 
     public override void _Process(double delta)

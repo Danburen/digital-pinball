@@ -45,7 +45,6 @@ public partial class CutSceneLayer : CanvasLayer
     private void ShowAndProcess()
     {
         Visible = true;
-        ProcessMode = ProcessModeEnum.Always;
     }
 
     public void FadeOut(Action onComplete = null)
@@ -80,7 +79,6 @@ public partial class CutSceneLayer : CanvasLayer
     public void OnAnimationFinished(StringName name)
     {
         Visible = false;
-        ProcessMode = ProcessModeEnum.Disabled;
         _onCompleteCallback?.Invoke();
         _onCompleteCallback = null;
     }
